@@ -4,13 +4,19 @@ A Machine Learning Project integrated with Django to Remove Background from Imag
 
 ## Installation:
 
-- git clone https://github.com/FarjaalAhmad/django_bgRemoverML
-- cd django_bgRemoverML
-- python3 -m pip install -r requirements.txt
+- git clone https://github.com/mza-codes/DJangoBGRemover
+- cd DJangoBGRemover
+- source bgRemover/bin/activate (this activates the virtual env)
 - bash setup.sh
 - python3 manage.py migrate
 - python3 manage.py runserver
+- If showing Error, use this line: python3 -m pip install -r requirements.txt
+- Open http://localhost:8000/
 
+ Thanks to <strong> FarjaalAhmad </strong>  for this awesome project !
+ Souce: https://github.com/FarjaalAhmad/django_bgRemoverML/
+ 
+--------
 ### Supported OS:
 
 - Linux
@@ -32,9 +38,9 @@ You can register here and Get $100 Free for 2 months.
 ### Contribution:
 
 - If you want to Contribute into this Project, Feel free to make Pull Request.
-<a href="https://github.com/FarjaalAhmad/django_bgRemoverML/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=FarjaalAhmad/django_bgRemoverML" />
+<a href="https://github.com/mza-codes/DJangoBGRemover/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=mza-codes/DJangoBGRemover" />
 </a>
 <hr>
 
-### Sorry Guys, I'm not able to give any time to this project. Sorry to say but I'm archiving this project. If anybody wants to continue developing/contributing to this project, You can mail me to become a collaborator or fork and continue on your own (Don't forget to send me your repo link, I'll mention that in my readme.md file so that people will follow your new one.
+### Author: Sorry Guys, I'm not able to give any time to this project. Sorry to say but I'm archiving this project. If anybody wants to continue developing/contributing to this project, You can mail me to become a collaborator or fork and continue on your own (Don't forget to send me your repo link, I'll mention that in my readme.md file so that people will follow your new one.
