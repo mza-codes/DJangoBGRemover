@@ -24,9 +24,12 @@
     </form>
     {% if image_path %}
     <hr>
-    <h5>Your Image :
-      <a class="btn btn-link" href="{{ image_path }}" target="_blank"><img src="{{ image_path }}" alt="image here"></a>
-    </h5>
+    <div class="output">
+      <h5>Your Image :</h5>
+        <a class="btn btn-link" href="{{ image_path }}" target="_blank">
+          <img src="{{ image_path }}" alt="image here">
+        </a>
+    </div>
     {% endif %}
     </center>
 
