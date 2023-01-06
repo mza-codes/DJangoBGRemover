@@ -10,8 +10,8 @@ hr {
 
 .main-container {
   margin: auto;
-  width: 50%;
-  height: 80%;
+  min-width: 50%;
+  min-height: 80%;
   padding: 10px;
   margin: 20px auto;
   background-color: #323031;
@@ -35,6 +35,10 @@ h1 {
 
 .upload-img-div {
   padding: 5%;
+}
+
+a {
+  text-decoration: none;
 }
 
 .out_image {

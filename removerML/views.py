@@ -2,11 +2,14 @@ from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
 import os, datetime, base64
 from . import remover
+from django.core import serializers
 
 extensions = ['.jpg', '.jpeg', '.png']
 
 def index(request):
+    
     if request.method == 'POST' and request.FILES['image']:
+        print(request.FILES)
         print("Inside True STATE",)
         image = request.FILES['image']
         ext = os.path.splitext(image.name)[1]
@@ -47,11 +50,9 @@ def data(request):
         return HttpResponse(request.get_host() + image_path)
 
 def populate(request):
-    print("REQ object".format(request))
-    print("REQ object".format(request.POST))
-    print("original",request)
     if request.method == 'POST' and request.FILES['image']:
-        print("Inside True STATE")
+        print(request.FILES)
+        print("Inside True STATE",)
         image = request.FILES['image']
         ext = os.path.splitext(image.name)[1]
         if ext.lower() in extensions:
@@ -62,12 +63,16 @@ def populate(request):
 
             input_path = os.getcwd() + uploaded_file_url
             output_path = os.getcwd() + "/uploads/" + file_name.split(".")[0] + "_processed.png"
-            print("data>>: ",input_path,output_path)
 
             remover.process(input_path, output_path)
             image_path = uploaded_file_url.split(".")[0] + "_processed.png"
-            return render(request, 'removerML/index.html', {"image_path": image_path})
-            # return HttpResponse("Action Complete Success: {}".format(image_path))
+            # return render(request, 'removerML/index.html', {"image_path": image_path})
+            response = request.get_host() + image_path
+            print(response)
+
+            # data = serializers.serialize('json', response)
+            return HttpResponse(response, content_type='application/json')
+            # return HttpResponse(request.get_host() + image_path)
         else:
             return HttpResponse("Only Allowed extensions are {}".format(extensions))
     return render(request, 'removerML/index.html')

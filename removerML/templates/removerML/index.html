@@ -12,6 +12,7 @@
 
 <body>
   <div class="main-container">
+    <a href="/" class="btn btn-primary btn-sm reloade" >Reload</a>
     <form method="post" enctype="multipart/form-data">
       <center>
         <div class="upload-img-div">
@@ -34,6 +35,13 @@
     {% endif %}
     </center>
   </div>
+  <script>
+    const button = document.querySelector(".reloader");
+    button.addEventListener("click",(e) =>{
+      console.log(e)
+      window.location.reload();
+    });
+  </script>
 </body>
 
 </html>
