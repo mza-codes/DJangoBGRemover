@@ -6,8 +6,8 @@ from . import remover
 extensions = ['.jpg', '.jpeg', '.png']
 
 def index(request):
-    print("REQ OBJ",request.method,request)
     if request.method == 'POST' and request.FILES['image']:
+        print("Inside True STATE",)
         image = request.FILES['image']
         ext = os.path.splitext(image.name)[1]
         if ext.lower() in extensions:
@@ -22,13 +22,14 @@ def index(request):
             remover.process(input_path, output_path)
             image_path = uploaded_file_url.split(".")[0] + "_processed.png"
             return render(request, 'removerML/index.html', {"image_path": image_path})
+            # return HttpResponse("Action Complete Success: {}".format(image_path))
         else:
             return HttpResponse("Only Allowed extensions are {}".format(extensions))
     return render(request, 'removerML/index.html')
 
 def data(request):
-    print("defData REQ ",request.method)
     if request.method == 'POST' and request.POST['image']:
+        print("Inside True STATE")
         image = request.POST['image']
         data = base64.b64decode(image)
         image_name = datetime.datetime.now().strftime("%Y%b%d%H%M%S%f") + ".jpg"
@@ -42,4 +43,31 @@ def data(request):
 
         remover.process(input_path, output_path)
         image_path = "/uploads/" + image_name.split(".")[0] + "_processed.png"
+        print("Final IMAGE PATH",image_path)
         return HttpResponse(request.get_host() + image_path)
+
+def populate(request):
+    print("REQ object".format(request))
+    print("REQ object".format(request.POST))
+    print("original",request)
+    if request.method == 'POST' and request.FILES['image']:
+        print("Inside True STATE")
+        image = request.FILES['image']
+        ext = os.path.splitext(image.name)[1]
+        if ext.lower() in extensions:
+            fs = FileSystemStorage()
+            filename = fs.save(image.name, image)
+            uploaded_file_url = fs.url(filename)
+            file_name = uploaded_file_url.split("/")[2]
+
+            input_path = os.getcwd() + uploaded_file_url
+            output_path = os.getcwd() + "/uploads/" + file_name.split(".")[0] + "_processed.png"
+            print("data>>: ",input_path,output_path)
+
+            remover.process(input_path, output_path)
+            image_path = uploaded_file_url.split(".")[0] + "_processed.png"
+            return render(request, 'removerML/index.html', {"image_path": image_path})
+            # return HttpResponse("Action Complete Success: {}".format(image_path))
+        else:
+            return HttpResponse("Only Allowed extensions are {}".format(extensions))
+    return render(request, 'removerML/index.html')
