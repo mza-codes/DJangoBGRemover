@@ -1,10 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=Staatliches&display=swap");
+
 body {
-  background-color: #ffc857;
+  background-color: #ff9557;
 }
+
 hr {
   background-color: #ffc857;
 }
+
 .main-container {
   margin: auto;
   width: 50%;
@@ -23,6 +26,7 @@ input[type="file"] {
   font-family: "DM Sans", sans-serif;
   word-wrap: break-word;
 }
+
 h1 {
   font-size: 70px;
   font-family: "Staatliches", cursive;
@@ -33,7 +37,14 @@ h1 {
   padding: 5%;
 }
 
-.output{
+.out_image {
+  border: 2px solid #fff;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.output {
+  margin-top: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;

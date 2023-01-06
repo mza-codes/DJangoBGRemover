@@ -6,6 +6,7 @@ from . import remover
 extensions = ['.jpg', '.jpeg', '.png']
 
 def index(request):
+    print("REQ OBJ",request.method,request)
     if request.method == 'POST' and request.FILES['image']:
         image = request.FILES['image']
         ext = os.path.splitext(image.name)[1]
@@ -26,6 +27,7 @@ def index(request):
     return render(request, 'removerML/index.html')
 
 def data(request):
+    print("defData REQ ",request.method)
     if request.method == 'POST' and request.POST['image']:
         image = request.POST['image']
         data = base64.b64decode(image)
