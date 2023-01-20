@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
 import os, datetime, base64
 from . import remover
-from django.core import serializers
 
 extensions = ['.jpg', '.jpeg', '.png']
 
