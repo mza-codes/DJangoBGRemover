@@ -9,7 +9,8 @@ def index(request):
     
     if request.method == 'POST' and request.FILES['image']:
         print(request.FILES)
-        print("Inside True STATE",)
+        print("Inside True STATE")
+
         image = request.FILES['image']
         ext = os.path.splitext(image.name)[1]
         if ext.lower() in extensions:
@@ -24,9 +25,10 @@ def index(request):
             remover.process(input_path, output_path)
             image_path = uploaded_file_url.split(".")[0] + "_processed.png"
             return render(request, 'removerML/index.html', {"image_path": image_path})
-            # return HttpResponse("Action Complete Success: {}".format(image_path))
         else:
-            return HttpResponse("Only Allowed extensions are {}".format(extensions))
+            # return HttpResponse("Only Allowed extensions are {}".format(extensions))
+            msg = "Only Allowed Extensions are {}".format(extensions)
+            return render(request, 'removerML/index.html', {"err_msg": msg})
     return render(request, 'removerML/index.html')
 
 def data(request):
