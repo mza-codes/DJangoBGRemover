@@ -21,6 +21,10 @@ A Machine Learning Project integrated with Django to Remove Background from Imag
 
 - Linux
 
+### Info:
+
+- When uploading image through ui, file name must not include spaces
+
 ### For API Usage:
 
 Make a POST request to http://localhost:8000/upload with the Following parameters.

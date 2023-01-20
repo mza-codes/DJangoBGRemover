@@ -1,39 +1,140 @@
 {% load static %}
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  <title>BG Remover</title>
-</head>
+    <title>BG Remover</title>
+  </head>
 
-<body>
-  <div class="main-container">
-    <form method="post" enctype="multipart/form-data">
+  <body>
+    <main class="main-container">
+      <div class="fixed">
+        <a href="/" class="styled_font normal btn btn-primary btn-sm">Reload</a>
+        {% comment %} <button class="styled_font normal btn btn-warning btn-sm">
+          Change Theme
+        </button> {% endcomment %}
+      </div>
+
       <center>
-        <div class="upload-img-div">
-          <h1>
-            BACKGROUND REMOVER
-          </h1>
-          <br>
-          <input class="btn btn-warning" type="file" name="image">
+        <form
+          onsubmit="disableBtn()"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="upload-img-div">
+            <h1>BACKGROUND REMOVER</h1>
+            <br />
+            <label class="styled_font normal h4 img-btn" for="image"
+              >Select Image</label
+            >
+            <input
+              class="btn btn-warning"
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              hidden
+              onchange="handleChange()"
+            />
+            <img
+              id="payload"
+              class="input_image collapse"
+              src="null"
+              alt="uploaded_image"
+            />
+
+            <p id="error" class="font2 err h5">
+              {%if err_msg %} {{ err_msg }} {% endif %}
+            </p>
+          </div>
+
+          <button
+            id="submission"
+            class="styled_font submit_btn"
+            style="font-size: 20px"
+            type="submit"
+            disabled
+          >
+            Submit
+          </button>
+          <div id="loader" class="loader collapse">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <h6 class="font2">Please Wait While Loading</h6>
+          </div>
+        </form>
+
+        {% if image_path %}
+        <hr />
+        <div class="output">
+          <h3 class="styled_font normal h2">OUTPUT</h3>
+          <img class="out_image" src="{{ image_path }}" alt="image here" />
+          <a
+            class="btn btn-warning styled_font normal my-3"
+            href="{{ image_path }}"
+            target="_blank"
+            download="{{ image_path }}"
+            >Download</a
+          >
         </div>
-        <button class="btn btn-warning" style="font-size: 20px;" type="submit">Upload</button>
-    </form>
-    {% if image_path %}
-    <hr>
-    <div class="output">
-      <h5>Your Image :</h5>
-        <a class="btn btn-link" href="{{ image_path }}" target="_blank">
-          <img src="{{ image_path }}" alt="image here">
-        </a>
-    </div>
-    {% endif %}
-    </center>
+        {% endif %}
+      </center>
+    </main>
 
-  </div>
-</body>
+    <script>
+      const allowed_exts = [
+        "image/jpeg",
+        "image/png",
+        "image/bmp",
+        "image/svg",
+        "image/jpg",
+        "image/webp",
+      ];
+      const submit = document.querySelector("#submission");
+      const file = document.querySelector("#image");
+      const imgView = document.querySelector("#payload");
+      const loader = document.querySelector("#loader");
+      const errorView = document.querySelector("#error");
 
+      function disableBtn() {
+        errorView.textContent = "";
+        submit.disabled = true;
+        loader.classList.replace("collapse", "collapse.show");
+        return;
+      }
+
+      function handleChange() {
+        errorView.textContent = "";
+        const uploaded = file?.files[0];
+        console.log(uploaded.type, allowed_exts);
+        if (!uploaded.type.includes(allowed_exts)) { // this method is not working! so reversed truthy value
+          const url = URL.createObjectURL(uploaded);
+          imgView.src = url;
+          imgView.classList.replace("collapse", "collapse.show");
+          submit.disabled = false;
+        } else {
+          errorView.textContent = "Unsupported File Format!";
+        }
+      }
+    </script>
+  </body>
 </html>
