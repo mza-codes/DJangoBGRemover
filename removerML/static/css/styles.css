@@ -7,12 +7,30 @@
   --text-2: #fc5692;
   --success: #56fc56;
   --failure: #fc5656;
+  --border: #fff;
+}
+
+.light {
+  --bg-1: #fff8e4;
+  --text: #966400;
+  --text-2: #940036;
+  --success: #008b00;
+  --failure: #e20000;
+  --border: #111;
 }
 
 body {
   /* background-color: #ff9557; */
   background-color: var(--bg-1);
   padding-bottom: 1rem;
+  min-height: 97vh;
+  padding-bottom: 3vh;
+}
+
+@media only screen and (max-width: 350px) and (min-width: 0px) {
+  .brand {
+    font-size: 40px;
+  }
 }
 
 hr {
@@ -32,7 +50,17 @@ hr {
   font-family: "DM Sans", sans-serif;
   word-wrap: break-word;
   color: var(--text);
-  margin-bottom: 10px;
+  padding-bottom: 0.5rem;
+}
+
+.center {
+  gap: 4px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .show {
@@ -40,14 +68,14 @@ hr {
 }
 
 .input_image {
-  border: 2px solid #fff;
+  border: 2px solid var(--border);
   max-width: 80vw;
   max-height: 600px;
 }
 
 .submit_btn {
   color: var(--text-2);
-  border: 1px solid var(--text-2);
+  border: 2px solid var(--text-2);
   background: transparent;
   outline: none;
   border-radius: 6px;
@@ -57,12 +85,12 @@ hr {
 .submit_btn:disabled,
 .submit_btn:disabled:hover {
   color: #999;
-  border: 1px solid #999;
+  border: 2px solid #999;
 }
 
 .submit_btn:hover {
   color: var(--success);
-  border: 1px solid var(--success);
+  border: 2px solid var(--success);
 }
 
 .img-btn {
@@ -135,20 +163,21 @@ a {
 }
 
 .out_image {
-  border: 2px solid #fff;
+  border: 2px solid var(--border);
   max-width: 90vw;
   max-height: 90vh;
 }
 
 .output {
-  margin-top: 4rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   max-width: 90vw;
-  max-height: 80vh;
+  /* max-height: 80vh; */
 }
 
 /* LoaderV2 */
@@ -181,7 +210,8 @@ a {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgb(255, 192, 149);
+  /* background: rgb(255, 192, 149); */
+  background: var(--text-2);
   margin: -4px 0 0 -4px;
 }
 
